@@ -12,10 +12,6 @@ check: ## Run code quality tools.
 	@uv run pre-commit run -a
 	@echo "🚀 Static type checking: Running {{ cookiecutter.type_checker }}"
 	@uv run {% if cookiecutter.type_checker == "mypy" %}mypy{% else %}ty check{% endif %}
-{%- if cookiecutter.deptry == 'y' %}
-	@echo "🚀 Checking for obsolete dependencies: Running deptry"
-	@uv run deptry {% if cookiecutter.layout == "src" %}src{% else %}.{% endif %}
-{%- endif %}
 
 .PHONY: test
 test: ## Test the code with pytest

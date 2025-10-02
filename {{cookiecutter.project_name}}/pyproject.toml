@@ -28,7 +28,6 @@ dev = [
     "pytest>=7.2.0",
     "pre-commit>=2.20.0",
     "tox-uv>=1.11.3",
-    {% if cookiecutter.deptry == 'y' %}"deptry>=0.23.0",{% endif %}
     {% if cookiecutter.type_checker == "mypy" -%}
         "mypy>=0.991",
     {%- elif cookiecutter.type_checker == "ty" -%}
@@ -45,13 +44,6 @@ dev = [
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
-{% if cookiecutter.layout == "src" -%}
-[tool.hatch.build.targets.wheel]
-packages = ["src/{{cookiecutter.project_slug}}"]
-{%- else -%}
-[tool.hatch.build.targets.wheel]
-packages = ["{{cookiecutter.project_slug}}"]
-{%- endif %}
 
 {% if cookiecutter.type_checker == "mypy" -%}
 [tool.mypy]

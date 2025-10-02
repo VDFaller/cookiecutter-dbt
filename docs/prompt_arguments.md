@@ -56,11 +56,6 @@ simple as creating a new release release on Github. For more info,
 see
 [Publishing to PyPI](./features/publishing.md).
 
-**deptry**
-
-`"y"` or `"n"`. Adds [deptry](https://fpgmaas.github.io/deptry/)
-to the development dependencies of the project, and adds it to the `make check` command. `deptry` is a command line tool to check for issues with dependencies in a Python project, such as obsolete or missing dependencies.
-
 **mkdocs**
 
 `"y"` or `"n"`. Adds [MkDocs](https://www.mkdocs.org/)
