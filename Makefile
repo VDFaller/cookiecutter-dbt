@@ -18,7 +18,7 @@ bake-and-test-deploy: ## For quick publishing to cookiecutter-dbt-example to tes
 		email="vdfaller@gmail.com" \
 		github_author_handle=fpgmaas \
 		project_name=cookiecutter-dbt-example \
-		project_slug=cookiecutter_uv_example
+		project_slug=cookiecutter_dbt_example
 	@cd cookiecutter-dbt-example; uv sync && \
 		git init -b main && \
 		git add . && \
