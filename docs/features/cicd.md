@@ -25,9 +25,8 @@ formatting.
 `on-release-main.yml` does all of the former whenever a new release is
 made on the `main` branch. In addition, `on-release-main.yml` also
 publishes the project to PyPI if `publish_to_pypi` is set to
-`"y"`, and it builds and deploys the documentation
-if `mkdocs` is set to `"y"`. To learn more about these features,
-see [Publishing to PyPI](./publishing.md) and [Documentation with MkDocs](./mkdocs.md)
+`"y"`. To learn more about these features,
+see [Publishing to PyPI](./publishing.md).
 
 Additionally, all workflows check for compatibility with multiple Python
 versions if `tox` is set to `"y"`.

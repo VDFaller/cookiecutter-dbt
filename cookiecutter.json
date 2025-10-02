@@ -29,6 +29,14 @@
     "y",
     "n"
   ],
+  "mkdocs": [
+    "y",
+    "n"
+  ],
+  "layout": [
+    "flat",
+    "src"
+  ],
   "type_checker": [
     "mypy",
     "ty"
@@ -40,5 +48,9 @@
     "Apache Software License 2.0",
     "GNU General Public License v3",
     "Not open source"
+  ],
+  "_copy_without_render": [
+    "models/**",
+    "macros/**"
   ]
 }
