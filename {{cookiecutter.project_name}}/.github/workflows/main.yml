@@ -57,17 +57,17 @@ jobs:
           {% raw %}CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}{% endraw %}
 {%- endif %}
 
-{%- if cookiecutter.mkdocs == "y" %}
-
-  check-docs:
+  dbtf-tests:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
     steps:
       - name: Check out
         uses: actions/checkout@v4
 
       - name: Set up the environment
-        uses: ./.github/actions/setup-python-env
+        uses: ./.github/actions/setup-dbtf-env
 
-      - name: Check if documentation can be built
-        run: uv run mkdocs build -s
-{%- endif %}
+      - name: Run DBT Fusion tests
+        run: dbtf compile --profiles-dir .github -t 

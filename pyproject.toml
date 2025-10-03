@@ -36,7 +36,6 @@ dev = [
     "pre-commit>=2.20.0",
     "pytest-cookies>=0.6.1",
     "tox-uv>=1.11.3",
-    "deptry>=0.23.0",
     "mypy>=0.991",
     "pytest-cov>=4.0.0",
     "ruff>=0.11.5",
@@ -50,10 +49,10 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.setuptools]
-packages = ["cookiecutter_uv"]
+packages = ["cookiecutter_dbt"]
 
 [tool.setuptools.package-data]
-"cookiecutter_uv" = ["*"]
+"cookiecutter_dbt" = ["*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -63,10 +62,10 @@ skip_empty = true
 
 [tool.coverage.run]
 branch = true
-source = ["cookiecutter_uv"]
+source = ["cookiecutter_dbt"]
 
 [tool.mypy]
-files = ['cookiecutter_uv']
+files = ['cookiecutter_dbt']
 disallow_untyped_defs = true
 disallow_any_unimported = true
 no_implicit_optional = true
@@ -75,16 +74,9 @@ warn_return_any = true
 warn_unused_ignores = true
 show_error_codes = true
 
-[tool.deptry]
-extend_exclude = [
-  ".+/test_foo.py"
-]
-
-[tool.deptry.per_rule_ignores]
-DEP002 = ["cookiecutter"]
 
 [tool.ruff]
-target-version = "py39"
+target-version = "py312"
 line-length = 120
 fix = true
 

@@ -18,7 +18,7 @@ bake-and-test-deploy: ## For quick publishing to cookiecutter-dbt-example to tes
 		email="vdfaller@gmail.com" \
 		github_author_handle=fpgmaas \
 		project_name=cookiecutter-dbt-example \
-		project_slug=cookiecutter_uv_example
+		project_slug=cookiecutter_dbt_example
 	@cd cookiecutter-dbt-example; uv sync && \
 		git init -b main && \
 		git add . && \
@@ -45,8 +45,6 @@ check: ## Run code quality tools.
 	@uv run pre-commit run -a
 	@echo "🚀 Static type checking: Running mypy"
 	@uv run mypy
-	@echo "🚀 Checking for obsolete dependencies: Running deptry"
-	@uv run deptry .
 
 .PHONY: test
 test: ## Test the code with pytest.

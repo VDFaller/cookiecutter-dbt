@@ -35,12 +35,11 @@ from <project_slug> import foo
 
 A short description of your project.
 
-**layout**
-
-`"flat"` or `"src"`, defaults to `"flat"`.
-
-- `"flat"`: Places the Python module in the root directory.
-- `"src"`: Organizes the project by placing the Python module inside a `src` directory.
+**project_type**
+`"single project"` or `"dbt mesh"`. 
+Choose `"single project"` if you want to create a single dbt core or fusion project. 
+Choose `"dbt mesh"` if you want to create a repository that can contain multiple dbt core or fusion projects. 
+[Intro to DBT Mesh](https://docs.getdbt.com/best-practices/how-we-mesh/mesh-1-intro)
 
 **include_github_actions**
 
@@ -56,17 +55,6 @@ simple as creating a new release release on Github. For more info,
 see
 [Publishing to PyPI](./features/publishing.md).
 
-**deptry**
-
-`"y"` or `"n"`. Adds [deptry](https://fpgmaas.github.io/deptry/)
-to the development dependencies of the project, and adds it to the `make check` command. `deptry` is a command line tool to check for issues with dependencies in a Python project, such as obsolete or missing dependencies.
-
-**mkdocs**
-
-`"y"` or `"n"`. Adds [MkDocs](https://www.mkdocs.org/)
-documentation to your project. This includes automatically parsing
-your docstrings and adding them to the documentation. Documentation
-will be deployed to the `gh-pages` branch.
 
 **codecov**
 
