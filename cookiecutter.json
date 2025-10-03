@@ -51,6 +51,7 @@
   ],
   "_copy_without_render": [
     "models/**",
-    "macros/**"
+    "macros/**",
+    ".github/profiles.yml"
   ]
 }

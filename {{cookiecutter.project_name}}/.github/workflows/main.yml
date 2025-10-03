@@ -56,3 +56,18 @@ jobs:
         env:
           {% raw %}CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}{% endraw %}
 {%- endif %}
+
+  dbtf-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Set up the environment
+        uses: ./.github/actions/setup-dbtf-env
+
+      - name: Run DBT Fusion tests
+        run: dbtf compile --profiles-dir .github -t 

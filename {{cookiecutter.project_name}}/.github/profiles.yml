@@ -1,0 +1,11 @@
+your_profile:  # you have to change the name of this because there's jinja in two places.
+  target: ci
+  outputs:
+    ci:
+      type: databricks
+      method: http
+      schema: whatever
+      host: "{{ env_var('DBT_HOST') }}"
+      http_path: "{{ env_var('DBT_HTTP_PATH') }}"
+      catalog: "{{ env_var('DBT_CATALOG') }}"
+      token: "{{ env_var('DBT_ACCESS_TOKEN') }}"

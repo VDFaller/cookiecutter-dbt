@@ -1,4 +1,4 @@
-name: jaffle_shop
+name: "{{cookiecutter.project_name}}"
 
 profile: "{{cookiecutter.project_name}}"
 
