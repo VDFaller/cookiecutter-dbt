@@ -62,19 +62,13 @@ git clone git@github.com:YOUR_NAME/cookiecutter-dbt.git
 cd cookiecutter-dbt
 ```
 
-Then, install and activate the environment with:
+Then, install the environment with:
 
 ```bash
-uv sync
+task install
 ```
 
-4. Install pre-commit to run linters/formatters at commit time:
-
-```bash
-uv run pre-commit install
-```
-
-5. Create a branch for local development:
+4. Create a branch for local development:
 
 ```bash
 git checkout -b name-of-your-bugfix-or-feature
@@ -84,19 +78,19 @@ Now you can make your changes locally.
 
 6. Don\'t forget to add test cases for your added functionality to the `tests` directory.
 
-7. When you\'re done making changes, check that your changes pass the formatting tests.
+6. When you\'re done making changes, check that your changes pass the formatting tests.
 
 ```bash
-make check
+task check
 ```
 
-8. Now, validate that all unit tests are passing:
+7. Now, validate that all unit tests are passing:
 
 ```bash
-make test
+task test
 ```
 
-9. Before raising a pull request you should also run tox. This will run the tests across different versions of Python:
+8. Before raising a pull request you should also run tox. This will run the tests across different versions of Python:
 
 ```bash
 tox
@@ -105,14 +99,14 @@ tox
 This requires you to have multiple versions of Python installed.
 This step is also triggered in the CI/CD pipeline, so you could also choose to skip this step locally.
 
-10. Reflect your changes in the documentation. Update relevant files in the `docs` directory, and potentially the `README`.
+9. Reflect your changes in the documentation. Update relevant files in the `docs` directory, and potentially the `README`.
     You can check the updated documentation with:
 
 ```bash
-make docs
+task docs
 ```
 
-11. Commit your changes and push your branch to GitHub:
+10. Commit your changes and push your branch to GitHub:
 
 ```bash
 git add .
@@ -120,7 +114,7 @@ git commit -m "Your detailed description of your changes."
 git push origin name-of-your-bugfix-or-feature
 ```
 
-12. Submit a pull request through the GitHub website.
+11. Submit a pull request through the GitHub website.
 
 # Pull Request Guidelines
 
