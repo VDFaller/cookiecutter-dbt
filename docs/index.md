@@ -36,5 +36,7 @@ Follow the prompts to configure your project. Once completed, a new directory co
 
 ### Acknowledgements
 
-This project is partially based on [Vince Faller's](https://github.com/VDFaller/cookiecutter-dbt.git) template [cookiecutter-uv](https://github.com/VDFaller/cookiecutter-dbt.git)
-which is a fork of [Audrey Feldroy's](https://github.com/audreyfeldroy) great [cookiecutter-pypackage](https://github.com/audreyfeldroy/cookiecutter-pypackage).
+This project is a fork and adaptation of
+[osprey-oss/cookiecutter-uv](https://github.com/osprey-oss/cookiecutter-uv),
+which itself traces back to
+[Audrey Feldroy's cookiecutter-pypackage](https://github.com/audreyfeldroy/cookiecutter-pypackage).

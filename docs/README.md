@@ -59,4 +59,4 @@ Place singular tests that must always run in CI in `tests/ci_tests/`.
 
 ---
 
-Repository initiated with [fpgmaas/cookiecutter-dbt](https://github.com/fpgmaas/cookiecutter-dbt).
+Repository initiated with [VDFaller/cookiecutter-dbt](https://github.com/VDFaller/cookiecutter-dbt).

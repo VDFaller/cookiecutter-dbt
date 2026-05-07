@@ -1,11 +1,11 @@
 site_name: cookiecutter-dbt
 repo_url: https://github.com/VDFaller/cookiecutter-dbt
 site_url: https://VDFaller.github.io/cookiecutter-dbt
-site_description: A cookiecutter template for Python projects that use uv for its dependency management
+site_description: A cookiecutter template for private corporate dbt repositories using DBT Fusion
 site_author: Vince Faller
 edit_uri: edit/main/docs/
-repo_name: fpgmaas/cookiecutter-dbt
-copyright: Maintained by <a href="https://fpgmaas.com">Florian</a>.
+repo_name: VDFaller/cookiecutter-dbt
+copyright: Maintained by Vince Faller.
 
 nav:
   - Home: index.md

@@ -31,7 +31,7 @@ def main() -> None:
         "--overwrite-if-exists",
         'author=Vince Faller',
         "email=vdfaller@gmail.com",
-        "github_author_handle=fpgmaas",
+        "github_author_handle=VDFaller",
         "project_name=cookiecutter-dbt-example",
         "project_slug=cookiecutter_dbt_example",
     )
@@ -53,7 +53,7 @@ def main() -> None:
         "remote",
         "add",
         "origin",
-        "git@github.com:fpgmaas/cookiecutter-dbt-example.git",
+        "git@github.com:VDFaller/cookiecutter-dbt-example.git",
         cwd=PROJECT_DIR,
     )
     run("git", "push", "-f", "origin", "main", cwd=PROJECT_DIR)
