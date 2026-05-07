@@ -1,0 +1,119 @@
+version: "3"
+
+tasks:
+  default:
+    desc: Show available tasks
+    cmds:
+      - "task --list"
+    silent: true
+
+  help:
+    desc: Show available tasks
+    cmds:
+      - "task --list"
+    silent: true
+
+  bake:
+    desc: Bake without inputs and overwrite if exists.
+    cmds:
+      - "uv run cookiecutter --no-input . --overwrite-if-exists"
+
+  bake-src:
+    desc: Bake without inputs and overwrite if exists.
+    cmds:
+      - 'uv run cookiecutter --no-input . --overwrite-if-exists layout="src"'
+
+  bake-with-inputs:
+    desc: Bake with inputs and overwrite if exists.
+    cmds:
+      - "uv run cookiecutter . --overwrite-if-exists"
+
+  bake-and-test-deploy:
+    desc: For quick publishing to cookiecutter-dbt-example to test GH Actions
+    cmds:
+      - "uv run python scripts/bake_and_test_deploy.py"
+
+  install:
+    desc: Install the virtual environment
+    cmds:
+      - 'echo "Creating virtual environment"'
+      - "uv sync"
+
+  quality:
+    desc: Run the same quality checks as CI.
+    cmds:
+      - 'echo "Checking lock file consistency with pyproject.toml"'
+      - "uv sync --locked"
+      - 'echo "Linting code: Running pre-commit"'
+      - "uv run pre-commit run -a --show-diff-on-failure"
+
+  check:
+    desc: Run local quality and typing checks.
+    cmds:
+      - 'echo "Checking lock file consistency with pyproject.toml"'
+      - "uv lock --locked"
+      - 'echo "Linting code: Running pre-commit"'
+      - "uv run pre-commit run -a"
+      - 'echo "Static type checking: Running mypy"'
+      - "uv run mypy"
+
+  type-check:
+    desc: Run static type checking.
+    cmds:
+      - 'echo "Static type checking: Running mypy"'
+      - "uv run mypy"
+
+  test:
+    desc: Test the code with pytest.
+    cmds:
+      - 'echo "Testing code: Running pytest"'
+      - "uv run python -m pytest --cov --cov-config=pyproject.toml --cov-report=xml tests"
+
+  clean-build:
+    desc: Clean build artifacts
+    cmds:
+      - 'echo "Removing build artifacts"'
+      - >-
+        uv run python -c "import os, shutil; shutil.rmtree('dist') if
+        os.path.exists('dist') else None"
+
+  build:
+    desc: Build wheel file
+    deps:
+      - clean-build
+    cmds:
+      - 'echo "Creating wheel file"'
+      - "uvx --from build pyproject-build --installer uv"
+
+  publish:
+    desc: Publish a release to PyPI.
+    cmds:
+      - 'echo "Publishing: Dry run."'
+      - "uvx --from build pyproject-build --installer uv"
+      - 'echo "Publishing."'
+      - "uvx twine upload --repository-url https://upload.pypi.org/legacy/ dist/*"
+
+  build-and-publish:
+    desc: Build and publish.
+    deps:
+      - build
+    cmds:
+      - task: publish
+
+  docs-test:
+    desc: Test if documentation can be built without warnings or errors
+    cmds:
+      - "uv run mkdocs build -s"
+
+  docs:
+    desc: Build and serve the documentation
+    cmds:
+      - "uv run mkdocs serve"
+
+  ci:
+    desc: Run the full CI-equivalent task suite.
+    cmds:
+      - task: quality
+      - task: test
+      - task: type-check
+      - task: docs-test

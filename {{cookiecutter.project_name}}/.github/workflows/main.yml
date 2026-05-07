@@ -14,6 +14,9 @@ jobs:
       - name: Check out
         uses: actions/checkout@v4
 
+      - name: Install Task
+        uses: go-task/setup-task@v2
+
       - uses: actions/cache@v4
         with:
           path: ~/.cache/pre-commit
@@ -23,7 +26,7 @@ jobs:
         uses: ./.github/actions/setup-python-env
 
       - name: Run checks
-        run: make check
+        run: task quality
 
   tests-and-type-check:
     runs-on: ubuntu-latest
@@ -38,16 +41,19 @@ jobs:
       - name: Check out
         uses: actions/checkout@v4
 
+      - name: Install Task
+        uses: go-task/setup-task@v2
+
       - name: Set up the environment
         uses: ./.github/actions/setup-python-env
         with:
           python-version: {% raw %}${{ matrix.python-version }}{% endraw %}
 
       - name: Run tests
-        run: uv run python -m pytest tests {% if cookiecutter.codecov == "y" %}--cov --cov-config=pyproject.toml --cov-report=xml{%- endif %}
+        run: task test
 
       - name: Check typing
-        run: uv run {% if cookiecutter.type_checker == "mypy" %}mypy{% else %}ty check{% endif %}
+        run: task type-check
 
 {% if cookiecutter.codecov == "y" %}
       - name: Upload coverage reports to Codecov with GitHub Action on Python 3.11
@@ -70,4 +76,4 @@ jobs:
         uses: ./.github/actions/setup-dbtf-env
 
       - name: Run DBT Fusion tests
-        run: dbtf compile --profiles-dir .github -t 
+        run: dbtf compile --profiles-dir .github -t
