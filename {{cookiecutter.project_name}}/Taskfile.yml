@@ -48,11 +48,7 @@ tasks:
     desc: Test the code with pytest
     cmds:
       - 'echo "Testing code: Running pytest"'
-{%- if cookiecutter.codecov == "y" %}
-      - "uv run python -m pytest --cov --cov-config=pyproject.toml --cov-report=xml"
-{%- else %}
       - "uv run python -m pytest --doctest-modules"
-{%- endif %}
 
   ci:
     desc: Run the full CI-equivalent task suite.
