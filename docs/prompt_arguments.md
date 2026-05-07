@@ -25,11 +25,7 @@ and it should only contain alphanumeric characters and `-`'s.
 **project_slug**
 
 The project slug, will default to the `project_name` with all `-`'s
-replaced with `_`. This will be how you import your code later, e.g.
-
-```python
-from <project_slug> import foo
-```
+replaced with `_`. This is used in dbt project configuration and profile naming.
 
 **project_description**
 
@@ -47,21 +43,8 @@ Choose `"dbt mesh"` if you want to create a repository that can contain multiple
 workflows to setup the environment and run code formatting checks
 and unittests.
 
-**codecov**
+**type_checker**
 
-`"y"` or `"n"`. Adds code coverage checks with [codecov](https://about.codecov.io/).
-
-**dockerfile**
-
-`"y"` or `"n"`. Adds a simple [Dockerfile](https://docker.com).
-
-**devcontainer**
-
-`"y"` or `"n"`. Adds a [devcontainer](https://code.visualstudio.com/docs/devcontainers/containers) specification to the project along with pre-installed pre-commit hooks and VSCode python extension configuration.
-
-**open_source_license**
-
-Choose a [license](https://choosealicense.com/). Options:
-`["1. MIT License", "2. BSD license", "3. ISC license",  "4. Apache Software License 2.0", "5. GNU General Public License v3", "6. Not open source"]`
+`"ty"` or `"mypy"`. Controls which Python type checker is added to the generated project and used by `task check` and CI.
 
 ---

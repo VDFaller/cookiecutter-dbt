@@ -2,14 +2,11 @@
 
 [![Release](https://img.shields.io/github/v/release/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}})](https://img.shields.io/github/v/release/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}})
 [![Build status](https://img.shields.io/github/actions/workflow/status/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}}/main.yml?branch=main)](https://github.com/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}}/actions/workflows/main.yml?query=branch%3Amain)
-[![codecov](https://codecov.io/gh/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}}/branch/main/graph/badge.svg)](https://codecov.io/gh/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}})
 [![Commit activity](https://img.shields.io/github/commit-activity/m/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}})](https://img.shields.io/github/commit-activity/m/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}})
-[![License](https://img.shields.io/github/license/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}})](https://img.shields.io/github/license/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}})
 
 {{cookiecutter.project_description}}
 
 - **Github repository**: <https://github.com/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}}/>
-- **Documentation** <https://{{cookiecutter.author_github_handle}}.github.io/{{cookiecutter.project_name}}/>
 
 ## Getting started with your project
 
@@ -53,18 +50,12 @@ git commit -m 'Fix formatting issues'
 git push origin main
 ```
 
-You are now ready to start development on your project!
-The CI/CD pipeline will be triggered when you open a pull request, merge to main, or when you create a new release.
-
-To enable the code coverage reports, see [here](https://fpgmaas.github.io/cookiecutter-dbt/features/codecov/).
-
-## Releasing a new version
-
-{% if cookiecutter.mkdocs == "y" -%}
-Create a [new release](https://github.com/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}}/releases/new) on Github to deploy the documentation site.
-
-For more details, see [here](https://fpgmaas.github.io/cookiecutter-dbt/features/cicd/#how-to-trigger-a-release).
-{%- endif %}
+You are now ready to start development on your project.
+The CI/CD pipeline will be triggered when you open a pull request or merge to main.
+Pull requests use DBT Fusion with the DuckDB CI profile in `.github/profiles.yml`,
+compare the branch against `origin/main`, and build the `ci_run` selector from
+`selectors.yml` with `--state` and `--defer`.
+Place singular tests that must always run in CI in `tests/ci_tests/`.
 
 ---
 

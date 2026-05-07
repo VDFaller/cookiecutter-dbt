@@ -9,17 +9,14 @@
 [![Docs](https://img.shields.io/badge/docs-gh--pages-blue)](https://fpgmaas.github.io/cookiecutter-dbt/)
 [![License](https://img.shields.io/github/license/fpgmaas/cookiecutter-dbt)](https://img.shields.io/github/license/fpgmaas/cookiecutter-dbt)
 
-This is a modern Cookiecutter template that can be used to initiate a Python project with all the necessary tools for development, testing, and deployment. It supports the following features:
+This is a Cookiecutter template for private corporate dbt repositories using DBT Fusion. It supports the following features:
 
 - [uv](https://docs.astral.sh/uv/) for dependency management
 - CI/CD with [GitHub Actions](https://github.com/features/actions)
 - Pre-commit hooks with [pre-commit](https://pre-commit.com/)
-- Code quality with [ruff](https://docs.astral.sh/ruff/), [mypy](https://mypy.readthedocs.io/en/stable/)/[ty](https://docs.astral.sh/ty/).
-- Testing and coverage with [pytest](https://docs.pytest.org/en/7.1.x/) and [codecov](https://about.codecov.io/)
-- Documentation with [MkDocs](https://www.mkdocs.org/)
-- Compatibility testing for multiple versions of Python with [tox-uv](https://github.com/tox-dev/tox-uv)
-- Containerization with [Docker](https://www.docker.com/) or [Podman](https://podman.io/)
-- Development environment with [VSCode devcontainers](https://code.visualstudio.com/docs/devcontainers/containers)
+- Code quality with [ruff](https://docs.astral.sh/ruff/) and optional [ty](https://docs.astral.sh/ty/)/[mypy](https://mypy.readthedocs.io/en/stable/)
+- Python testing with [pytest](https://docs.pytest.org/en/7.1.x/)
+- DBT Fusion CI with a baked `selectors.yml` and DuckDB CI profile
 
 ---
 
