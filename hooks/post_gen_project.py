@@ -8,11 +8,15 @@ PROJECT_DIRECTORY = os.path.realpath(os.path.curdir)
 
 
 def remove_file(filepath: str) -> None:
-    os.remove(os.path.join(PROJECT_DIRECTORY, filepath))
+    path = os.path.join(PROJECT_DIRECTORY, filepath)
+    if os.path.exists(path):
+        os.remove(path)
 
 
 def remove_dir(filepath: str) -> None:
-    shutil.rmtree(os.path.join(PROJECT_DIRECTORY, filepath))
+    path = os.path.join(PROJECT_DIRECTORY, filepath)
+    if os.path.isdir(path):
+        shutil.rmtree(path)
 
 
 def move_file(filepath: str, target: str) -> None:
@@ -27,7 +31,7 @@ if __name__ == "__main__":
     if "{{cookiecutter.include_github_actions}}" != "y":
         remove_dir(".github")
     else:
-        if "{{cookiecutter.mkdocs}}" != "y" and "{{cookiecutter.publish_to_pypi}}" == "n":
+        if "{{cookiecutter.mkdocs}}" != "y":
             remove_file(".github/workflows/on-release-main.yml")
 
     if "{{cookiecutter.mkdocs}}" != "y":

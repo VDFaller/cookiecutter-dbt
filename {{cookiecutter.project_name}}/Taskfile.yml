@@ -54,37 +54,6 @@ tasks:
       - "uv run python -m pytest --doctest-modules"
 {%- endif %}
 
-  clean-build:
-    desc: Clean build artifacts
-    cmds:
-      - 'echo "Removing build artifacts"'
-      - >-
-        uv run python -c "import os, shutil; shutil.rmtree('dist') if
-        os.path.exists('dist') else None"
-
-  build:
-    desc: Build wheel file
-    deps:
-      - clean-build
-    cmds:
-      - 'echo "Creating wheel file"'
-      - "uvx --from build pyproject-build --installer uv"
-
-{%- if cookiecutter.publish_to_pypi == "y" %}
-  publish:
-    desc: Publish a release to PyPI.
-    cmds:
-      - 'echo "Publishing."'
-      - "uvx twine upload --repository-url https://upload.pypi.org/legacy/ dist/*"
-
-  build-and-publish:
-    desc: Build and publish.
-    deps:
-      - build
-    cmds:
-      - task: publish
-{%- endif %}
-
   ci:
     desc: Run the full CI-equivalent task suite.
     cmds:

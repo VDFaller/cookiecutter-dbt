@@ -55,7 +55,7 @@ Initially, the CI/CD pipeline will fail for two reasons:
 To fix that, we first install the environment and the pre-commit hooks with:
 
 ```bash
-make install
+task install
 ```
 
 This will generate the `uv.lock` file
@@ -82,11 +82,9 @@ git push origin main
 
 If you enabled code coverage with codecov for your project, you should sign up with your GitHub account at [codecov.io](https://about.codecov.io/language/python/)
 
-## Step 9: Configure your repository secrets
+## Step 9: Optional codecov secret
 
-If you want to deploy your project to PyPI using the
-Github Actions, you will have to set some repository secrets. For
-instructions on how to do that, see [here](./features/publishing.md#set-up-for-pypi).
+If you enabled code coverage for your project, add the `CODECOV_TOKEN` repository secret if your Codecov setup requires it.
 
 ## Step 10: Enable your documentation
 

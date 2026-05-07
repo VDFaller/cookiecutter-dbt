@@ -30,7 +30,7 @@ git push -u origin main
 Then, install the environment and the pre-commit hooks with
 
 ```bash
-make install
+task install
 ```
 
 This will also generate your `uv.lock` file
@@ -56,17 +56,12 @@ git push origin main
 You are now ready to start development on your project!
 The CI/CD pipeline will be triggered when you open a pull request, merge to main, or when you create a new release.
 
-To finalize the set-up for publishing to PyPI, see [here](https://fpgmaas.github.io/cookiecutter-dbt/features/publishing/#set-up-for-pypi).
 To enable the code coverage reports, see [here](https://fpgmaas.github.io/cookiecutter-dbt/features/codecov/).
 
 ## Releasing a new version
 
-{% if cookiecutter.publish_to_pypi == "y" -%}
-
-- Create an API Token on [PyPI](https://pypi.org/).
-- Add the API Token to your projects secrets with the name `PYPI_TOKEN` by visiting [this page](https://github.com/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}}/settings/secrets/actions/new).
-- Create a [new release](https://github.com/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}}/releases/new) on Github.
-- Create a new tag in the form `*.*.*`.
+{% if cookiecutter.mkdocs == "y" -%}
+Create a [new release](https://github.com/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}}/releases/new) on Github to deploy the documentation site.
 
 For more details, see [here](https://fpgmaas.github.io/cookiecutter-dbt/features/cicd/#how-to-trigger-a-release).
 {%- endif %}

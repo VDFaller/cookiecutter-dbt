@@ -14,7 +14,6 @@ nav:
       - Linting & code quality: features/linting.md
       - Makefile: features/makefile.md
       - Dependency management with uv: features/uv.md
-      - Publishing to PyPI: features/publishing.md
       - Testing with Pytest: features/pytest.md
       - Test coverage with codecov: features/codecov.md
       - Documentation with MkDocs: features/mkdocs.md
@@ -56,7 +55,6 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/VDFaller/cookiecutter-dbt
     - icon: fontawesome/brands/python
-      link: https://pypi.org/project/cookiecutter-dbt/
 markdown_extensions:
   - toc:
       permalink: true

@@ -1,6 +1,6 @@
-name: "{{cookiecutter.project_name}}"
+name: "{{cookiecutter.project_slug}}"
 
-profile: "{{cookiecutter.project_name}}"
+profile: "{{cookiecutter.project_slug}}"
 
 seed-paths: ["seeds"]
 model-paths: ["models"]
@@ -11,11 +11,11 @@ clean-targets:
 
 seeds:
   # Builds seeds into '<your_schema_name>_raw'
-  {{cookiecutter.project_name}}:
+  {{cookiecutter.project_slug}}:
     +schema: raw
 
 models:
-  {{cookiecutter.project_name}}:
+  {{cookiecutter.project_slug}}:
     # Materialize staging models as views, and marts as tables
     staging:
       +materialized: view

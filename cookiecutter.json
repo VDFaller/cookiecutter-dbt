@@ -13,10 +13,6 @@
     "y",
     "n"
   ],
-  "publish_to_pypi": [
-    "y",
-    "n"
-  ],
   "codecov": [
     "y",
     "n"
@@ -51,7 +47,6 @@
   ],
   "_copy_without_render": [
     "models/**",
-    "macros/**",
-    ".github/profiles.yml"
+    "macros/**"
   ]
 }

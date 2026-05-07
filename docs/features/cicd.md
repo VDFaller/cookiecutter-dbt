@@ -22,11 +22,7 @@ whenever a pull request is opened or updated. They call the `action.yml`
 files to set-up the environment, run the tests, and check the code
 formatting.
 
-`on-release-main.yml` does all of the former whenever a new release is
-made on the `main` branch. In addition, `on-release-main.yml` also
-publishes the project to PyPI if `publish_to_pypi` is set to
-`"y"`. To learn more about these features,
-see [Publishing to PyPI](./publishing.md).
+If `mkdocs` is set to `"y"`, `on-release-main.yml` deploys the documentation site whenever a new release is made on GitHub.
 
 Additionally, all workflows check for compatibility with multiple Python
 versions if `tox` is set to `"y"`.
