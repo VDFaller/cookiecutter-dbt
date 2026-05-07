@@ -14,6 +14,12 @@ def test_bake_project(cookies):
     assert result.exception is None
     assert result.project_path.name == "my-project"
     assert result.project_path.is_dir()
+    assert is_valid_yaml(result.project_path / "selectors.yml")
+    assert file_contains_text(f"{result.project_path}/selectors.yml", 'name: ci_run')
+    assert file_contains_text(f"{result.project_path}/selectors.yml", 'path:tests/ci_tests')
+    assert file_contains_text(f"{result.project_path}/selectors.yml", 'state:modified+1')
+    assert file_contains_text(f"{result.project_path}/selectors.yml", '+state:modified')
+    assert file_contains_text(f"{result.project_path}/selectors.yml", 'state:modified+')
 
 
 def test_using_pytest(cookies, tmp_path):
@@ -26,6 +32,7 @@ def test_using_pytest(cookies, tmp_path):
         assert result.project_path.name == "example-project"
         assert result.project_path.is_dir()
         assert is_valid_yaml(result.project_path / ".github" / "workflows" / "main.yml")
+        assert is_valid_yaml(result.project_path / "selectors.yml")
 
         # Install the uv environment and run the tests.
         with run_within_dir(str(result.project_path)):
@@ -43,6 +50,7 @@ def test_src_layout_using_pytest(cookies, tmp_path):
         assert result.project_path.name == "example-project"
         assert result.project_path.is_dir()
         assert is_valid_yaml(result.project_path / ".github" / "workflows" / "main.yml")
+        assert is_valid_yaml(result.project_path / "selectors.yml")
 
         # Install the uv environment and run the tests.
         with run_within_dir(str(result.project_path)):
@@ -83,10 +91,7 @@ def test_not_mkdocs(cookies, tmp_path):
         result = cookies.bake(extra_context={"mkdocs": "n"})
         assert result.exit_code == 0
         assert is_valid_yaml(result.project_path / ".github" / "workflows" / "main.yml")
-        assert is_valid_yaml(result.project_path / ".github" / "workflows" / "on-release-main.yml")
-        assert not file_contains_text(
-            f"{result.project_path}/.github/workflows/on-release-main.yml", "mkdocs gh-deploy"
-        )
+        assert not os.path.isfile(f"{result.project_path}/.github/workflows/on-release-main.yml")
         assert not os.path.isdir(f"{result.project_path}/docs")
 
 
@@ -139,6 +144,30 @@ def test_remove_release_workflow(cookies, tmp_path):
         result = cookies.bake(extra_context={"mkdocs": "n"})
         assert result.exit_code == 0
         assert not os.path.isfile(f"{result.project_path}/.github/workflows/on-release-main.yml")
+
+
+def test_dbtf_ci_workflow(cookies, tmp_path):
+    with run_within_dir(tmp_path):
+        result = cookies.bake()
+
+        workflow_path = result.project_path / ".github" / "workflows" / "main.yml"
+        assert result.exit_code == 0
+        assert is_valid_yaml(workflow_path)
+        assert file_contains_text(workflow_path, "fetch-depth: 0")
+        assert file_contains_text(workflow_path, "git fetch --no-tags --prune origin main")
+        assert file_contains_text(workflow_path, 'PR_HEAD="$(git rev-parse HEAD)"')
+        assert file_contains_text(workflow_path, 'MERGE_BASE="$(git merge-base origin/main "$PR_HEAD")"')
+        assert file_contains_text(workflow_path, 'rm -rf "$STATE_DIR"')
+        assert file_contains_text(workflow_path, 'git checkout --force "$MERGE_BASE"')
+        assert file_contains_text(workflow_path, "dbtf parse --profiles-dir .github -t ci")
+        assert file_contains_text(workflow_path, 'cp target/manifest.json "$STATE_DIR/manifest.json"')
+        assert file_contains_text(workflow_path, 'git checkout --force "$PR_HEAD"')
+        assert file_contains_text(
+            workflow_path,
+            'dbtf build --selector ci_run --state "$STATE_DIR" --profiles-dir .github -t ci --defer',
+        )
+        assert file_contains_text(workflow_path, "target/run_results.json")
+        assert file_contains_text(workflow_path, "target/manifest.json")
 
 
 def test_license_mit(cookies, tmp_path):

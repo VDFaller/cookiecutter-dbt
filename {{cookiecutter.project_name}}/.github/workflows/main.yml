@@ -71,9 +71,39 @@ jobs:
     steps:
       - name: Check out
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up the environment
         uses: ./.github/actions/setup-dbtf-env
 
-      - name: Run DBT Fusion tests
-        run: dbtf compile --profiles-dir .github -t ci
+      - name: Build changed graph with DBT Fusion
+        env:
+          STATE_DIR: .github/dbtf-state
+        run: |
+          set -euo pipefail
+
+          git fetch --no-tags --prune origin main
+          PR_HEAD="$(git rev-parse HEAD)"
+          MERGE_BASE="$(git merge-base origin/main "$PR_HEAD")"
+
+          rm -rf "$STATE_DIR"
+          mkdir -p "$STATE_DIR"
+
+          git checkout --force "$MERGE_BASE"
+          dbtf deps
+          dbtf parse --profiles-dir .github -t ci
+          cp target/manifest.json "$STATE_DIR/manifest.json"
+
+          git checkout --force "$PR_HEAD"
+          dbtf deps
+          dbtf build --selector ci_run --state "$STATE_DIR" --profiles-dir .github -t ci --defer
+
+      - name: Upload DBT Fusion artifacts on failure
+        if: {% raw %}${{ failure() }}{% endraw %}
+        uses: actions/upload-artifact@v4
+        with:
+          name: dbtf-artifacts
+          path: |
+            target/run_results.json
+            target/manifest.json

@@ -55,6 +55,10 @@ git push origin main
 
 You are now ready to start development on your project.
 The CI/CD pipeline will be triggered when you open a pull request or merge to main.
+Pull requests use DBT Fusion with the DuckDB CI profile in `.github/profiles.yml`,
+compare the branch against `origin/main`, and build the `ci_run` selector from
+`selectors.yml` with `--state` and `--defer`.
+Place singular tests that must always run in CI in `tests/ci_tests/`.
 
 To enable the code coverage reports, see [here](https://fpgmaas.github.io/cookiecutter-dbt/features/codecov/).
 

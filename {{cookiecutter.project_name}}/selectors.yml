@@ -1,0 +1,12 @@
+selectors:
+  - name: ci_run
+    description: |
+      Run CI-focused singular tests, modified nodes, their immediate children,
+      and nodes that bridge between upstream and downstream modified changes.
+    definition:
+      union:
+        - "path:tests/ci_tests"
+        - "state:modified+1"
+        - intersection:
+            - "+state:modified"
+            - "state:modified+"
