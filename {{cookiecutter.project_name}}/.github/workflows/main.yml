@@ -64,6 +64,7 @@ jobs:
 {%- endif %}
 
   dbtf-tests:
+    if: {% raw %}${{ github.event_name == 'pull_request' }}{% endraw %}
     runs-on: ubuntu-latest
     defaults:
       run:
