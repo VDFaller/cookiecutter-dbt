@@ -1,41 +1,39 @@
-# CI/CD with Github actions
+# CI/CD with GitHub Actions
 
-when `include_github_actions` is set to `"y"`, a `.github` directory is
-added with the following structure:
+When `include_github_actions` is set to `"y"`, the generated project includes a
+single `.github/workflows/main.yml` workflow plus two local setup actions:
 
     .github
-    ├── workflows
-    ├─── run-checks
-    │    └── action.yml
-    ├─── setup-python-env
-    │    └── action.yml
-    ├── on-merge-to-main.yml
-    ├── on-pull-request.yml
-    └── on-release-main.yml
+    ├── actions
+    │   ├── setup-dbtf-env
+    │   │   └── action.yml
+    │   └── setup-python-env
+    │       └── action.yml
+    ├── profiles.yml
+    └── workflows
+        └── main.yml
 
-`on-merge-to-main.yml` and `on-pull-request.yml` are identical except
-for their trigger conditions; the first is run whenever a new commit is
-made to `main` (which should
-[only](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/about-protected-branches)
-happen through merge requests, hence the name), and the latter is run
-whenever a pull request is opened or updated. They call the `action.yml`
-files to set-up the environment, run the tests, and check the code
-formatting.
+`main.yml` runs three jobs:
 
-`on-release-main.yml` does all of the former whenever a new release is
-made on the `main` branch. In addition, `on-release-main.yml` also
-publishes the project to PyPI if `publish_to_pypi` is set to
-`"y"`. To learn more about these features,
-see [Publishing to PyPI](./publishing.md).
+- `quality` for formatting and lint checks
+- `tests-and-type-check` across the configured Python matrix
+- `dbtf-tests` for pull request dbt validation using DBT Fusion
 
-Additionally, all workflows check for compatibility with multiple Python
-versions if `tox` is set to `"y"`.
+The DBT Fusion job stays DuckDB-based and uses the baked CI profile in
+`.github/profiles.yml`. For pull requests, it fetches enough Git history to
+compute the merge base against `origin/main`, parses the project at that merge
+base, saves `target/manifest.json` as state, restores the PR head, and runs:
 
-## How to trigger a release?
+```bash
+dbtf build --selector ci_run --state .github/dbtf-state --profiles-dir .github -t ci --defer
+```
 
-To trigger a new release, navigate to your repository on GitHub, click `Releases` on the right, and then select `Draft
-a new release`. If you fail to find the button, you could also directly visit
-`https://github.com/<username>/<repository-name>/releases/new`.
+The generated repository also includes a baked `selectors.yml` with a generic
+`ci_run` selector. That selector supports two CI patterns out of the box:
 
-Give your release a title, and add a new tag in the form `*.*.*` where the
-`*`'s are alphanumeric. To finish, press `Publish release`.
+- Put singular tests that should always run in PR CI under `tests/ci_tests/`
+- Use state selection to run modified nodes, their immediate children, and
+  bridge nodes between upstream and downstream modified changes
+
+Additionally, the Python test job checks compatibility with multiple Python
+versions.

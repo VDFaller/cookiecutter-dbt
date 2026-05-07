@@ -10,17 +10,14 @@
 
 ---
 
-This is a modern Cookiecutter template that can be used to initiate a Python project with all the necessary tools for development, testing, and deployment. It supports the following features:
+This is a Cookiecutter template for private corporate dbt repositories using DBT Fusion. It supports the following features:
 
 - [uv](https://docs.astral.sh/uv/) for dependency management
 - CI/CD with [GitHub Actions](https://github.com/features/actions)
 - Pre-commit hooks with [pre-commit](https://pre-commit.com/)
 - Code quality with [ruff](https://docs.astral.sh/ruff/), [mypy](https://mypy.readthedocs.io/en/stable/)/[ty](https://docs.astral.sh/ty/)
-- Publishing to [PyPI](https://pypi.org) by creating a new release on GitHub
-- Testing and coverage with [pytest](https://docs.pytest.org/en/7.1.x/) and [codecov](https://about.codecov.io/)
-- Compatibility testing for multiple versions of Python with [tox-uv](https://github.com/tox-dev/tox-uv)
-- Containerization with [Docker](https://www.docker.com/) or [Podman](https://podman.io/)
-- Development environment with [VSCode devcontainers](https://code.visualstudio.com/docs/devcontainers/containers)
+- Python testing with [pytest](https://docs.pytest.org/en/7.1.x/)
+- DBT Fusion CI with a baked `selectors.yml` and DuckDB CI profile
 
 An example of a repository generated with this package can be found [here](https://github.com/VDFaller/cookiecutter-dbt-example).
 
@@ -39,5 +36,7 @@ Follow the prompts to configure your project. Once completed, a new directory co
 
 ### Acknowledgements
 
-This project is partially based on [Vince Faller's](https://github.com/VDFaller/cookiecutter-dbt.git) template [cookiecutter-uv](https://github.com/VDFaller/cookiecutter-dbt.git)
-which is a fork of [Audrey Feldroy's](https://github.com/audreyfeldroy) great [cookiecutter-pypackage](https://github.com/audreyfeldroy/cookiecutter-pypackage).
+This project is a fork and adaptation of
+[osprey-oss/cookiecutter-uv](https://github.com/osprey-oss/cookiecutter-uv),
+which itself traces back to
+[Audrey Feldroy's cookiecutter-pypackage](https://github.com/audreyfeldroy/cookiecutter-pypackage).

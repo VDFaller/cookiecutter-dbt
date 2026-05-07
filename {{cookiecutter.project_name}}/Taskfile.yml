@@ -1,0 +1,58 @@
+version: "3"
+
+tasks:
+  default:
+    desc: Show available tasks
+    cmds:
+      - "task --list"
+    silent: true
+
+  help:
+    desc: Show available tasks
+    cmds:
+      - "task --list"
+    silent: true
+
+  install:
+    desc: Install the virtual environment and pre-commit hooks
+    cmds:
+      - 'echo "Creating virtual environment using uv"'
+      - "uv sync"
+      - "uv run pre-commit install"
+
+  quality:
+    desc: Run the same quality checks as CI.
+    cmds:
+      - 'echo "Checking lock file consistency with pyproject.toml"'
+      - "uv sync --locked"
+      - 'echo "Linting code: Running pre-commit"'
+      - "uv run pre-commit run -a --show-diff-on-failure"
+
+  check:
+    desc: Run local quality and typing checks.
+    cmds:
+      - 'echo "Checking lock file consistency with pyproject.toml"'
+      - "uv lock --locked"
+      - 'echo "Linting code: Running pre-commit"'
+      - "uv run pre-commit run -a"
+      - 'echo "Static type checking: Running {{ cookiecutter.type_checker }}"'
+      - "uv run {% if cookiecutter.type_checker == 'mypy' %}mypy{% else %}ty check{% endif %}"
+
+  type-check:
+    desc: Run static type checking.
+    cmds:
+      - 'echo "Static type checking: Running {{ cookiecutter.type_checker }}"'
+      - "uv run {% if cookiecutter.type_checker == 'mypy' %}mypy{% else %}ty check{% endif %}"
+
+  test:
+    desc: Test the code with pytest
+    cmds:
+      - 'echo "Testing code: Running pytest"'
+      - "uv run python -m pytest --doctest-modules"
+
+  ci:
+    desc: Run the full CI-equivalent task suite.
+    cmds:
+      - task: quality
+      - task: test
+      - task: type-check

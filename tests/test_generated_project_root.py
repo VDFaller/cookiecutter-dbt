@@ -13,22 +13,19 @@ def test_full_structure(cookies, tmp_path):
     """
 
     expected_files = [
-        ".devcontainer",
         ".github",
         ".gitignore",
         ".pre-commit-config.yaml",
         "CONTRIBUTING.md",
-        "Dockerfile",
-        "LICENSE",
-        "Makefile",
         "README.md",
-        "codecov.yaml",
-        "docs",
-        "example_project",
-        "mkdocs.yml",
+        "Taskfile.yml",
+        "dbt_project.yml",
+        "macros",
+        "models",
         "pyproject.toml",
+        "seeds",
+        "selectors.yml",
         "tests",
-        "tox.ini",
     ]
 
     with run_within_dir(tmp_path):

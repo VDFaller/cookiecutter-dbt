@@ -2,14 +2,11 @@
 
 [![Release](https://img.shields.io/github/v/release/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}})](https://img.shields.io/github/v/release/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}})
 [![Build status](https://img.shields.io/github/actions/workflow/status/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}}/main.yml?branch=main)](https://github.com/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}}/actions/workflows/main.yml?query=branch%3Amain)
-[![codecov](https://codecov.io/gh/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}}/branch/main/graph/badge.svg)](https://codecov.io/gh/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}})
 [![Commit activity](https://img.shields.io/github/commit-activity/m/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}})](https://img.shields.io/github/commit-activity/m/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}})
-[![License](https://img.shields.io/github/license/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}})](https://img.shields.io/github/license/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}})
 
 {{cookiecutter.project_description}}
 
 - **Github repository**: <https://github.com/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}}/>
-- **Documentation** <https://{{cookiecutter.author_github_handle}}.github.io/{{cookiecutter.project_name}}/>
 
 ## Getting started with your project
 
@@ -30,7 +27,7 @@ git push -u origin main
 Then, install the environment and the pre-commit hooks with
 
 ```bash
-make install
+task install
 ```
 
 This will also generate your `uv.lock` file
@@ -53,23 +50,12 @@ git commit -m 'Fix formatting issues'
 git push origin main
 ```
 
-You are now ready to start development on your project!
-The CI/CD pipeline will be triggered when you open a pull request, merge to main, or when you create a new release.
-
-To finalize the set-up for publishing to PyPI, see [here](https://fpgmaas.github.io/cookiecutter-dbt/features/publishing/#set-up-for-pypi).
-To enable the code coverage reports, see [here](https://fpgmaas.github.io/cookiecutter-dbt/features/codecov/).
-
-## Releasing a new version
-
-{% if cookiecutter.publish_to_pypi == "y" -%}
-
-- Create an API Token on [PyPI](https://pypi.org/).
-- Add the API Token to your projects secrets with the name `PYPI_TOKEN` by visiting [this page](https://github.com/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}}/settings/secrets/actions/new).
-- Create a [new release](https://github.com/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}}/releases/new) on Github.
-- Create a new tag in the form `*.*.*`.
-
-For more details, see [here](https://fpgmaas.github.io/cookiecutter-dbt/features/cicd/#how-to-trigger-a-release).
-{%- endif %}
+You are now ready to start development on your project.
+The CI/CD pipeline will be triggered when you open a pull request or merge to main.
+Pull requests use DBT Fusion with the DuckDB CI profile in `.github/profiles.yml`,
+compare the branch against `origin/main`, and build the `ci_run` selector from
+`selectors.yml` with `--state` and `--defer`.
+Place singular tests that must always run in CI in `tests/ci_tests/`.
 
 ---
 

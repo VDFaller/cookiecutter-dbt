@@ -13,7 +13,7 @@ inputs:
   dbtf-version:
     description: "DBT Fusion version to use"
     required: true
-    default: "2.0.0-preview.33"
+    default: "2.0.0-preview.175"
 
 runs:
   using: "composite"
@@ -21,13 +21,13 @@ runs:
     - name: Set up the environment
       uses: ./.github/actions/setup-python-env
       with:
-        python-version: ${{ inputs.python-version }}
-        uv-version: ${{ inputs.uv-version }}
+        python-version: {% raw %}${{ inputs.python-version }}{% endraw %}
+        uv-version: {% raw %}${{ inputs.uv-version }}{% endraw %}
 
     - name: Install DBT Fusion
-      run: curl -fsSL https://public.cdn.getdbt.com/fs/install/install.sh | sh -s -- --update --version ${{ inputs.dbtf-version }}
+      run: curl -fsSL https://public.cdn.getdbt.com/fs/install/install.sh | sh -s -- --update --version {% raw %}${{ inputs.dbtf-version }}{% endraw %}
       shell: bash
-    
+
     - name: add dbtf symlink
       run: ln -sf /home/runner/.local/bin/dbt /home/runner/.local/bin/dbtf
       shell: bash

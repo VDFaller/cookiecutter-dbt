@@ -1,26 +1,19 @@
 site_name: cookiecutter-dbt
 repo_url: https://github.com/VDFaller/cookiecutter-dbt
 site_url: https://VDFaller.github.io/cookiecutter-dbt
-site_description: A cookiecutter template for Python projects that use uv for its dependency management
+site_description: A cookiecutter template for private corporate dbt repositories using DBT Fusion
 site_author: Vince Faller
 edit_uri: edit/main/docs/
-repo_name: fpgmaas/cookiecutter-dbt
-copyright: Maintained by <a href="https://fpgmaas.com">Florian</a>.
+repo_name: VDFaller/cookiecutter-dbt
+copyright: Maintained by Vince Faller.
 
 nav:
   - Home: index.md
   - Features:
       - CI/CD with Github Actions: features/cicd.md
       - Linting & code quality: features/linting.md
-      - Makefile: features/makefile.md
       - Dependency management with uv: features/uv.md
-      - Publishing to PyPI: features/publishing.md
       - Testing with Pytest: features/pytest.md
-      - Test coverage with codecov: features/codecov.md
-      - Documentation with MkDocs: features/mkdocs.md
-      - Compatibility testing with Tox: features/tox.md
-      - Containerization with Docker or Podman: features/docker.md
-      - Devcontainer with VSCode: features/devcontainer.md
   - Tutorial: tutorial.md
   - Prompt Arguments: prompt_arguments.md
 plugins:
@@ -56,7 +49,6 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/VDFaller/cookiecutter-dbt
     - icon: fontawesome/brands/python
-      link: https://pypi.org/project/cookiecutter-dbt/
 markdown_extensions:
   - toc:
       permalink: true
