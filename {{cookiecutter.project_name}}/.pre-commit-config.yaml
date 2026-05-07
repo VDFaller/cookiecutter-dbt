@@ -1,4 +1,22 @@
 repos:
+  - repo: https://github.com/dbt-checkpoint/dbt-checkpoint
+    rev: "v2.0.8"
+    hooks:
+      - id: check-model-has-description
+        files: ^models/
+      - id: check-model-has-tests-by-group
+        files: ^models/
+        args:
+          - "--tests"
+          - "unique"
+          - "unique_combination_of_columns"
+          - "expect_compound_columns_to_be_unique"
+          - "--test-cnt"
+          - "1"
+          - "--"
+      - id: check-model-columns-have-desc
+        files: ^models/
+
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: "v5.0.0"
     hooks:

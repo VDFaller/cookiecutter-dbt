@@ -13,11 +13,21 @@ def test_bake_project(cookies):
     assert result.project_path.name == "my-project"
     assert result.project_path.is_dir()
     assert is_valid_yaml(result.project_path / "selectors.yml")
+    assert is_valid_yaml(result.project_path / ".pre-commit-config.yaml")
     assert file_contains_text(f"{result.project_path}/selectors.yml", 'name: ci_run')
     assert file_contains_text(f"{result.project_path}/selectors.yml", 'path:tests/ci_tests')
     assert file_contains_text(f"{result.project_path}/selectors.yml", 'state:modified+1')
     assert file_contains_text(f"{result.project_path}/selectors.yml", '+state:modified')
     assert file_contains_text(f"{result.project_path}/selectors.yml", 'state:modified+')
+    assert file_contains_text(f"{result.project_path}/.pre-commit-config.yaml", "dbt-checkpoint/dbt-checkpoint")
+    assert file_contains_text(f"{result.project_path}/.pre-commit-config.yaml", "check-model-has-tests-by-group")
+    assert file_contains_text(f"{result.project_path}/.pre-commit-config.yaml", "unique_combination_of_columns")
+    assert file_contains_text(f"{result.project_path}/.pre-commit-config.yaml", "expect_compound_columns_to_be_unique")
+    assert file_contains_text(
+        f"{result.project_path}/{'packages.yml'}",
+        "metaplane/dbt_expectations",
+    )
+    assert file_contains_text(f"{result.project_path}/macros/clean_text.sql", "macro clean_text")
 
 
 def test_using_pytest(cookies, tmp_path):
