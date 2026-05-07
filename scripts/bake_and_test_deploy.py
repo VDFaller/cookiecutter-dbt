@@ -4,13 +4,12 @@ import shutil
 import subprocess
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[1]
 PROJECT_DIR = ROOT / "cookiecutter-dbt-example"
 
 
 def run(*args: str, cwd: Path | None = None, check: bool = True) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(
+    return subprocess.run(  # noqa: S603 - arguments are fixed by this script, not user-supplied
         args,
         cwd=cwd or ROOT,
         check=check,
@@ -29,7 +28,7 @@ def main() -> None:
         "--no-input",
         ".",
         "--overwrite-if-exists",
-        'author=Vince Faller',
+        "author=Vince Faller",
         "email=vdfaller@gmail.com",
         "github_author_handle=VDFaller",
         "project_name=cookiecutter-dbt-example",
