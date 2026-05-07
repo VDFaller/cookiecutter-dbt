@@ -36,9 +36,9 @@ from <project_slug> import foo
 A short description of your project.
 
 **project_type**
-`"single project"` or `"dbt mesh"`. 
-Choose `"single project"` if you want to create a single dbt core or fusion project. 
-Choose `"dbt mesh"` if you want to create a repository that can contain multiple dbt core or fusion projects. 
+`"single project"` or `"dbt mesh"`.
+Choose `"single project"` if you want to create a single dbt core or fusion project.
+Choose `"dbt mesh"` if you want to create a repository that can contain multiple dbt core or fusion projects.
 [Intro to DBT Mesh](https://docs.getdbt.com/best-practices/how-we-mesh/mesh-1-intro)
 
 **include_github_actions**

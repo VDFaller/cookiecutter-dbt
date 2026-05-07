@@ -27,7 +27,7 @@ runs:
     - name: Install DBT Fusion
       run: curl -fsSL https://public.cdn.getdbt.com/fs/install/install.sh | sh -s -- --update --version ${{ inputs.dbtf-version }}
       shell: bash
-    
+
     - name: add dbtf symlink
       run: ln -sf /home/runner/.local/bin/dbt /home/runner/.local/bin/dbtf
       shell: bash
